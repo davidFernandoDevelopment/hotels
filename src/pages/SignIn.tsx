@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useState, FormEvent } from 'react';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
 import { OAuth } from '../ui';
 import { useForm } from '../hooks';
@@ -8,10 +8,14 @@ import { useForm } from '../hooks';
 
 const SignIn = () => {
     const [showPass, setShowPass] = useState(false);
-    const { email, password, onInputChange } = useForm({
+    const { formState, email, password, onInputChange } = useForm({
         email: '',
         password: ''
     });
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    };
 
     return (
         <section>
@@ -23,7 +27,7 @@ const SignIn = () => {
                         src="https://images.unsplash.com/photo-1560518883-ce09059eeffa" alt="key" />
                 </div>
                 <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-20'>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <input
                             name="email"
                             type="email"

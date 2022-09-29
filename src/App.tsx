@@ -1,11 +1,14 @@
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Header } from './ui';
+import { store } from './store';
 import { ForgotPassword, Home, Offers, Profile, SignIn, SignUp } from './pages';
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <Router>
         <Header />
         <Routes>
@@ -17,7 +20,19 @@ function App() {
           <Route path='forgot-password' element={<ForgotPassword />} />
         </Routes>
       </Router>
-    </>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='dark'
+      />
+    </Provider>
   );
 }
 

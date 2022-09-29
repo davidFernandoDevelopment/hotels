@@ -1,17 +1,23 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useState, FormEvent } from 'react';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
-import { useForm } from '../hooks';
+import { useAuthStore, useForm } from '../hooks';
 
 
 const SignUp = () => {
+    const { startRegister } = useAuthStore();
     const [showPass, setShowPass] = useState(false);
-    const { name, email, password, onInputChange } = useForm({
+    const { formState, name, email, password, onInputChange } = useForm({
         name: '',
         email: '',
         password: ''
     });
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        startRegister(formState);
+    };
 
     return (
         <section>
@@ -23,7 +29,7 @@ const SignUp = () => {
                         src="https://images.unsplash.com/photo-1560518883-ce09059eeffa" alt="key" />
                 </div>
                 <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-20'>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <input
                             name="name"
                             type="name"
