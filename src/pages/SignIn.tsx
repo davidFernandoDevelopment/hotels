@@ -3,10 +3,11 @@ import { useState, FormEvent } from 'react';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
 import { OAuth } from '../ui';
-import { useForm } from '../hooks';
+import { useAuthStore, useForm } from '../hooks';
 
 
 const SignIn = () => {
+    const { startLogin } = useAuthStore();
     const [showPass, setShowPass] = useState(false);
     const { formState, email, password, onInputChange } = useForm({
         email: '',
@@ -15,6 +16,7 @@ const SignIn = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        startLogin(formState);
     };
 
     return (

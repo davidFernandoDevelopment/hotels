@@ -1,9 +1,10 @@
 import {
 	updateProfile,
-	User as UserFirebase,
-	createUserWithEmailAndPassword,
-	GoogleAuthProvider,
 	signInWithPopup,
+	GoogleAuthProvider,
+	User as UserFirebase,
+	signInWithEmailAndPassword,
+	createUserWithEmailAndPassword,
 } from 'firebase/auth';
 
 import { Error, Response } from './interface';
@@ -76,6 +77,34 @@ export const registerEmailPassword = async ({
 				email,
 				password,
 				uid: res.user.uid,
+			},
+		};
+	} catch (error: any) {
+		return {
+			ok: false,
+			result: {
+				code: error.code,
+				message: error.message,
+			},
+		};
+	}
+};
+
+export const signInEmailPassword = async ({
+	email,
+	password,
+}: Credentetials): Promise<Response<User | Error>> => {
+	try {
+		const res = await signInWithEmailAndPassword(FirebaseAuth, email, password);
+		const { uid, photoURL, displayName } = res.user;
+
+		return {
+			ok: true,
+			result: {
+				uid,
+				email,
+				photo: photoURL as string,
+				name: displayName as string,
 			},
 		};
 	} catch (error: any) {

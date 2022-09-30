@@ -3,13 +3,31 @@ import { toast } from 'react-toastify';
 import { Credentetials, User } from '../auth';
 import { useAppSelector, useAppDispatch } from './';
 import { onLogin, onChecking, onLogout } from '../store';
-import { registerEmailPassword, Error, signInWithGoogle } from '../firebase';
+import {
+	registerEmailPassword,
+	Error,
+	signInWithGoogle,
+	signInEmailPassword,
+} from '../firebase';
 
 export const useAuthStore = () => {
 	const dispatch = useAppDispatch();
 	const { user } = useAppSelector((state) => state.auth);
 
-	const startLogin = async () => {};
+	const startLogin = async (credentials: Credentetials) => {
+		try {
+			dispatch(onChecking());
+			const { ok, result } = await signInEmailPassword(credentials);
+
+			if (!ok) {
+				toast.error((result as Error).message);
+				return dispatch(onLogout(result as Error));
+			}
+
+			toast.success('Login exitoso');
+			dispatch(onLogin(result as User));
+		} catch (err: any) {}
+	};
 
 	const startRegister = async (credentials: Credentetials) => {
 		try {
