@@ -1,12 +1,22 @@
+import { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useForm } from '../hooks';
+import { useAuthStore } from '../hooks/useAuthStore';
 
 
 const ForgotPassword = () => {
+
+    const { startResetPassword } = useAuthStore();
     const { email, onInputChange } = useForm({
         email: ''
     });
+
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        startResetPassword(email);
+    };
 
     return (
         <section>
@@ -18,7 +28,7 @@ const ForgotPassword = () => {
                         src="https://images.unsplash.com/photo-1560518883-ce09059eeffa" alt="key" />
                 </div>
                 <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-20'>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <input
                             name="email"
                             type="email"

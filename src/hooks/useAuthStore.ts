@@ -8,6 +8,7 @@ import {
 	Error,
 	signInWithGoogle,
 	signInEmailPassword,
+	forgotPassword,
 } from '../firebase';
 
 export const useAuthStore = () => {
@@ -59,6 +60,19 @@ export const useAuthStore = () => {
 		} catch (err: any) {}
 	};
 
+	const startResetPassword = async (email: string) => {
+		try {
+			const { ok, result } = await forgotPassword(email);
+			if (!ok) {
+				toast.error((result as Error).message);
+			} else {
+				toast.success('Por favor revise su bandeja');
+			}
+
+			dispatch(onLogout(result as Error));
+		} catch (error) {}
+	};
+
 	return {
 		//* PROPIEDADES
 		user,
@@ -67,5 +81,6 @@ export const useAuthStore = () => {
 		startLogin,
 		startRegister,
 		startGoogleSignIn,
+		startResetPassword,
 	};
 };

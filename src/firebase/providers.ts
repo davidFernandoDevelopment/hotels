@@ -5,6 +5,7 @@ import {
 	User as UserFirebase,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
+	sendPasswordResetEmail,
 } from 'firebase/auth';
 
 import { Error, Response } from './interface';
@@ -106,6 +107,24 @@ export const signInEmailPassword = async ({
 				photo: photoURL as string,
 				name: displayName as string,
 			},
+		};
+	} catch (error: any) {
+		return {
+			ok: false,
+			result: {
+				code: error.code,
+				message: error.message,
+			},
+		};
+	}
+};
+
+export const forgotPassword = async (email: string) => {
+	try {
+		await sendPasswordResetEmail(FirebaseAuth, email);
+
+		return {
+			ok: true,
 		};
 	} catch (error: any) {
 		return {
