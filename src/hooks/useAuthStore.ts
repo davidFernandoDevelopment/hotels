@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 
 import { Credentetials, User } from '../auth';
 import { useAppSelector, useAppDispatch } from './';
-import { onLogin, onChecking, onLogout } from '../store';
+import { onLogin, onChecking, onLogout, onEditProfile } from '../store';
 import {
 	registerEmailPassword,
 	Error,
@@ -10,6 +10,7 @@ import {
 	signInEmailPassword,
 	forgotPassword,
 	signOutFirebase,
+	updateProfileFirebase,
 } from '../firebase';
 
 export const useAuthStore = () => {
@@ -79,6 +80,14 @@ export const useAuthStore = () => {
 		dispatch(onLogout());
 	};
 
+	const startUpdateProfile = async (name: string) => {
+		try {
+			await updateProfileFirebase(name);
+			dispatch(onEditProfile(name));
+			toast.success('Se actualizo corrrectamente el nombre');
+		} catch (error) {}
+	};
+
 	return {
 		//* PROPIEDADES
 		user,
@@ -89,5 +98,6 @@ export const useAuthStore = () => {
 		startRegister,
 		startGoogleSignIn,
 		startResetPassword,
+		startUpdateProfile,
 	};
 };

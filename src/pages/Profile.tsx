@@ -1,14 +1,22 @@
+import { useState } from 'react';
+
 import { useForm } from '../hooks/useForm';
 import { useAuthStore } from '../hooks/useAuthStore';
+
+
 const Profile = () => {
-    const { startLogout } = useAuthStore();
+    const [edit, setEdit] = useState(false);
+    const { startLogout, user, startUpdateProfile } = useAuthStore();
     const { email, name, onInputChange } = useForm({
-        name: '',
-        email: ''
+        name: user?.name,
+        email: user?.email
     });
 
     const handleSignOut = () => {
         startLogout();
+    };
+    const handleChange = () => {
+        if (name) startUpdateProfile(name);
     };
 
     return (
@@ -24,24 +32,27 @@ const Profile = () => {
                         type="text"
                         name="name"
                         value={name}
-                        disabled
+                        disabled={!edit}
                         onChange={onInputChange}
-                        className='mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out'
+                        className={`mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out
+                            ${edit && "bg-red-200 focus:bg-red-200"}`}
                     />
                     <input
-                        type="email"
-                        name="email"
-                        value={email}
                         disabled
-                        onChange={onInputChange}
-                        className='mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out'
+                        type="email"
+                        value={email}
+                        className={`mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out`}
                     />
                     <div className='flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6'>
                         <p className='flex items-center'>
                             Do you want to change your name ?
                             <span
+                                onClick={() => {
+                                    setEdit(prev => !prev);
+                                    edit && handleChange();
+                                }}
                                 className='text-red-600 hover:text-red-700 transition ease-in-out duration-200 ml-1 cursor-pointer'
-                            >Edit</span>
+                            >{!edit ? 'Edit' : 'Apply changes'}</span>
                         </p>
                         <p
                             onClick={handleSignOut}

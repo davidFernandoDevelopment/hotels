@@ -12,7 +12,13 @@ import {
 import { Error, Response } from './interface';
 import { Credentetials, User } from '../auth';
 import { FirebaseAuth, FirebaseDB } from './config';
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import {
+	doc,
+	getDoc,
+	serverTimestamp,
+	setDoc,
+	updateDoc,
+} from 'firebase/firestore';
 
 const googleProvider = new GoogleAuthProvider();
 export const signInWithGoogle = async (): Promise<Response<User | Error>> => {
@@ -144,6 +150,28 @@ export const signOutFirebase = async () => {
 		return {
 			ok: true,
 		};
+	} catch (error: any) {
+		return {
+			ok: false,
+			result: {
+				code: error.code,
+				message: error.message,
+			},
+		};
+	}
+};
+
+export const updateProfileFirebase = async (name: string) => {
+	try {
+		if (FirebaseAuth.currentUser?.displayName !== name) {
+			await updateProfile(FirebaseAuth.currentUser as UserFirebase, {
+				displayName: name,
+			});
+			const docRef = doc(FirebaseDB, 'users', FirebaseAuth.currentUser?.uid!);
+			await updateDoc(docRef, {
+				name,
+			});
+		}
 	} catch (error: any) {
 		return {
 			ok: false,

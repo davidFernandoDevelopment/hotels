@@ -1,11 +1,10 @@
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Header } from './ui';
 import { store } from './store';
 import { AppRouter } from './router';
-import { Home, Offers, Profile } from './pages';
 
 function App() {
   return (

@@ -38,8 +38,12 @@ export const authSlice = createSlice({
 			state.status = 'not-authenticated';
 			state.error = payload ? payload : null;
 		},
+		onEditProfile: (state: AuthState, { payload }: PayloadAction<string>) => {
+			state.user!.name = payload;
+		},
 	},
 });
 
-export const { onChecking, onLogin, onLogout } = authSlice.actions;
+export const { onChecking, onLogin, onLogout, onEditProfile } =
+	authSlice.actions;
 export default authSlice.reducer;

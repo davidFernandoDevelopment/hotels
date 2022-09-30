@@ -45,20 +45,22 @@ const Header = () => {
                                         Profile
                                     </li>
                                 )
-                                : (
-                                    <li className={`cursor-pointer py-3 text-sm font-semibold
+                                : (status === "checking"
+                                    ? (<li>cargando...</li>)
+                                    : (
+                                        <li className={`cursor-pointer py-3 text-sm font-semibold
                                 text-gray-400 border-b-[3px] 
                                 border-b-transparent ${pathMatch('/auth/sign-in') && "text-black border-b-red-500"}`}
-                                        onClick={() => navigate('/auth/sign-in')}
-                                    >
-                                        Sign in
-                                    </li>
-                                )
+                                            onClick={() => navigate('/auth/sign-in')}
+                                        >
+                                            Sign in
+                                        </li>
+                                    ))
                         }
                     </ul>
                 </nav>
             </div>
-        </header>
+        </header >
     );
 };
 
