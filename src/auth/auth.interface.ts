@@ -7,7 +7,7 @@ export interface Credentetials {
 export interface User {
 	uid: string;
 	email: string;
-	password: string;
+	password?: string;
 	name?: string;
 	photo?: string;
 }
