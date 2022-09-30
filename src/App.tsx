@@ -4,21 +4,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { Header } from './ui';
 import { store } from './store';
-import { ForgotPassword, Home, Offers, Profile, SignIn, SignUp } from './pages';
+import { AppRouter } from './router';
+import { Home, Offers, Profile } from './pages';
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Header />
-        <Routes>
-          <Route path='' element={<Home />} />
-          <Route path='offers' element={<Offers />} />
-          <Route path='sign-in' element={<SignIn />} />
-          <Route path='sign-up' element={<SignUp />} />
-          <Route path='profile' element={<Profile />} />
-          <Route path='forgot-password' element={<ForgotPassword />} />
-        </Routes>
+        <AppRouter />
       </Router>
       <ToastContainer
         position="bottom-center"

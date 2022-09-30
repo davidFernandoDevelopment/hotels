@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, FormEvent } from 'react';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
-import { useAuthStore, useForm } from '../hooks';
+import { useAuthStore, useForm } from '../../hooks';
 
 
 const SignUp = () => {
@@ -70,7 +70,7 @@ const SignUp = () => {
                             <p className='mb-6'>
                                 ¿Tienes una cuenta?
                                 <Link
-                                    to="/sign-in"
+                                    to="/auth/sign-in"
                                     className='ml-1 text-red-500 hover:text-red-700 transition duration-200 ease-in-out'
                                 >
                                     Logeate

@@ -1,10 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useChecking } from '../hooks/useChecking';
 
 
 const Header = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
+    const status = useChecking();
 
     const pathMatch = (route: string) => {
         return route === location.pathname;
@@ -32,13 +34,27 @@ const Header = () => {
                         >
                             Offers
                         </li>
-                        <li className={`cursor-pointer py-3 text-sm font-semibold
-                         text-gray-400 border-b-[3px] 
-                         border-b-transparent ${pathMatch('/sign-in') && "text-black border-b-red-500"}`}
-                            onClick={() => navigate('/sign-in')}
-                        >
-                            Sign in
-                        </li>
+                        {
+                            status === 'authenticated'
+                                ? (
+                                    <li className={`cursor-pointer py-3 text-sm font-semibold
+                            text-gray-400 border-b-[3px] 
+                            border-b-transparent ${pathMatch('/profile') && "text-black border-b-red-500"}`}
+                                        onClick={() => navigate('/profile')}
+                                    >
+                                        Profile
+                                    </li>
+                                )
+                                : (
+                                    <li className={`cursor-pointer py-3 text-sm font-semibold
+                                text-gray-400 border-b-[3px] 
+                                border-b-transparent ${pathMatch('/auth/sign-in') && "text-black border-b-red-500"}`}
+                                        onClick={() => navigate('/auth/sign-in')}
+                                    >
+                                        Sign in
+                                    </li>
+                                )
+                        }
                     </ul>
                 </nav>
             </div>

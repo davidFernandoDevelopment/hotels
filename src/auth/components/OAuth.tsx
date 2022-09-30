@@ -1,6 +1,6 @@
 import { FcGoogle } from 'react-icons/fc';
 
-import { useAuthStore } from '../hooks';
+import { useAuthStore } from '../../hooks';
 
 const OAuth = () => {
 

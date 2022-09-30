@@ -1,8 +1,8 @@
 import { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useForm } from '../hooks';
-import { useAuthStore } from '../hooks/useAuthStore';
+import { useForm } from '../../hooks';
+import { useAuthStore } from '../../hooks/useAuthStore';
 
 
 const ForgotPassword = () => {
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
                         <button className='w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 transition duration-150 ease-in-out' type="submit">Send confirmation</button>
                         <div className='mt-4 flex justify-between whitespace-nowrap text-sm sm:text-lg'>
                             <Link
-                                to="/sign-in"
+                                to="/auth/sign-in"
                                 className='w-full text-center ml-1 text-red-500 hover:text-red-700 transition duration-200 ease-in-out'
                             >
                                 Volver

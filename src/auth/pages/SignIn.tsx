@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { useState, FormEvent } from 'react';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
-import { OAuth } from '../ui';
-import { useAuthStore, useForm } from '../hooks';
+import { OAuth } from '../components';
+import { useAuthStore, useForm } from '../../hooks';
 
 
 const SignIn = () => {
@@ -62,14 +62,14 @@ const SignIn = () => {
                             <p className='mb-6'>
                                 ¿No tienes una cuenta?
                                 <Link
-                                    to="/sign-up"
+                                    to="/auth/sign-up"
                                     className='ml-1 text-red-500 hover:text-red-700 transition duration-200 ease-in-out'
                                 >
                                     Registrate
                                 </Link>
                             </p>
                             <Link
-                                to="/forgot-password"
+                                to="/auth/forgot-password"
                                 className='ml-1 text-blue-500 hover:text-blue-700 transition duration-200 ease-in-out'
                             >
                                 ¿Olvidaste tu contraseña?

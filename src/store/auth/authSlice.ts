@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../../auth';
 import { Error } from '../../firebase';
 
-type Status = 'authenticated' | 'not-authenticated' | 'checking';
+export type Status = 'authenticated' | 'not-authenticated' | 'checking';
 interface AuthState {
 	status: Status;
 	user: User | null;

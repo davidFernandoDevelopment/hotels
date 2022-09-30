@@ -9,6 +9,7 @@ import {
 	signInWithGoogle,
 	signInEmailPassword,
 	forgotPassword,
+	signOutFirebase,
 } from '../firebase';
 
 export const useAuthStore = () => {
@@ -55,7 +56,7 @@ export const useAuthStore = () => {
 				return dispatch(onLogout(result as Error));
 			}
 
-			toast.success('Registro exitoso');
+			toast.success('Registro con google existoso');
 			dispatch(onLogin(result as User));
 		} catch (err: any) {}
 	};
@@ -73,12 +74,18 @@ export const useAuthStore = () => {
 		} catch (error) {}
 	};
 
+	const startLogout = async () => {
+		await signOutFirebase();
+		dispatch(onLogout());
+	};
+
 	return {
 		//* PROPIEDADES
 		user,
 
 		//* METODOS
 		startLogin,
+		startLogout,
 		startRegister,
 		startGoogleSignIn,
 		startResetPassword,
