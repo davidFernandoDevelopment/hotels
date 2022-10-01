@@ -1,2 +1,2 @@
-export { default as OAuth } from '../auth/components/OAuth';
 export { default as Header } from './Header';
+export { default as Spinner } from './Spinner';

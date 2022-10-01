@@ -13,7 +13,7 @@ const Header = () => {
     };
 
     return (
-        <header className='header sticky z-50 top-0 bg-white border-b shadow-sm'>
+        <header className='header sticky z-40 top-0 bg-white border-b shadow-sm'>
             <div className="header__container mx-auto max-w-6xl px-3 flex justify-between items-center">
                 <div className="header__logo">
                     <img className='h-5 cursor-pointer' src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg" alt="Realtor Logo" />

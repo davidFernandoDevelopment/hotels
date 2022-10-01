@@ -1,15 +1,16 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import { PrivateRoute, PublicRoute } from './';
+import { Spinner } from '../ui';
 import { AuthRoutes } from '../auth';
 import { useChecking } from '../hooks';
+import { PrivateRoute, PublicRoute } from './';
 import { Home, Offers, Profile } from '../pages';
 
 
 const AppRouter = () => {
     const status = useChecking();
 
-    if (status === 'checking') return <h3>Cargando ....</h3>;
+    if (status === 'checking') return <Spinner />;
 
     return (
         <Routes>

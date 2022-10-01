@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 
-import { useAppDispatch } from './';
-import { useAppSelector } from './useRedux';
 import { FirebaseAuth } from '../firebase/config';
 import { onLogin, onLogout, Status } from '../store';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 export const useChecking = (): Status => {
 	const dispatch = useAppDispatch();
