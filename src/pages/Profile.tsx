@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { FcHome } from 'react-icons/fc';
 
 import { useForm } from '../hooks/useForm';
 import { useAuthStore } from '../hooks/useAuthStore';
+import { Link } from 'react-router-dom';
 
 
 const Profile = () => {
@@ -61,7 +63,20 @@ const Profile = () => {
                             Sign Out
                         </p>
                     </div>
+                    <button
+                        type='submit'
+                        className='w-full px-6 py-4 font-medium uppercase rounded-md text-white bg-blue-600 hover:bg-blue-700 transition ease-in-out'
+                    >
+                        <Link
+                            to='/create-listing'
+                            className='flex gap-3 items-center justify-center'
+                        >
+                            <FcHome className='text-3xl bg-red-400 rounded-full p-1 border-2' />
+                            Sell or rent your home
+                        </Link>
+                    </button>
                 </form>
+
             </div>
         </section>
     );
